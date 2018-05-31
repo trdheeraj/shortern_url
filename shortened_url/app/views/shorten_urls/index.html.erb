@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Shorten Urls</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Short url</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shorten_urls.each do |shorten_url| %>
+      <tr>
+        <td><a target="_blank" href="<%= shorten_url.sanitize_url %>"><%= shorten_url.short_url %></a></td>
+        <td><%= link_to 'Show', shorten_url %></td>
+        <td><%= link_to 'Destroy', shorten_url, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<h3> Import Companies </h3>
+<%= form_tag import_shorten_urls_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Upload Shorten Url" %>
+<% end %>
+<%= link_to 'New Shorten Url', new_shorten_url_path %>
